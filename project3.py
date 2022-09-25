@@ -28,6 +28,8 @@ while True:
         print("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)))
         print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)))
+        print("Starting Coordinates: "+str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"]))
+        print("Destination Coordinates: "+str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"]))
         print("=============================================\n")
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
@@ -52,10 +54,12 @@ while True:
         print("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print("Miles: " + str("{:.2f}".format((json_data["route"]["distance"]))))
         print("Fuel Used (gal): " + str("{:.2f}".format((json_data["route"]["fuelUsed"]))))
+        print("Starting Coordinates: "+str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"]))
+        print("Destination Coordinates: "+str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"]))
         print("=============================================")
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])) + " miles)"))
-            print("=============================================\n")
+        print("=============================================\n")
      elif json_status == 402:
         print("**********************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
