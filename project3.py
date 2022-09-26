@@ -29,7 +29,7 @@ while True:
  #displays measurement menu and asks for 1 or 2 to select which measurement
  print(tabulate(mesme,headers="firstrow",stralign="center",tablefmt="fancy_grid"))
  print(tabulate(mesmenu,stralign="center",tablefmt="fancy_grid"))
- mes= int(input("ENTER 1 FOR METRIC OR 2:"))
+ mes= int(input("ENTER 1 OR 2:"))
 
  #this while loop repeats itself until 1 or 2 is entered
  while mes<1 or mes>2:
