@@ -65,6 +65,7 @@ while True:
         ["ESTIMATED FUEL USAGE:", str("{:.2f}".format((json_data["route"]["fuelUsed"]))+" gallons")],
         ["STARTING COORDINATES:",str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
         ["DESTINATION COORDINATES:",str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
+        print (tabulate(tinfo,tablefmt="fancy_grid"))
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             nav.append([(each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])) + " miles)")])
         print(tabulate(nav,headers="firstrow",tablefmt="github"))
