@@ -46,7 +46,7 @@ while True:
         #this is when a route is confirmed, the code stores the infos in a list so it can be displaed in tabular form. 
         tinfo = [["DIRECTIONS FROM:",(orig) + " to " + (dest)],["TRIP DURATION:",(json_data["route"]["formattedTime"])],
         ["TRIP DISTANCE:",str("{:.2f}".format((json_data["route"]["distance"])*1.61))+"km"],
-        ["ESTIMATED FUEL USAGE:", str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)+" LITERS")],
+        #["ESTIMATED FUEL USAGE:", str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)+" LITERS")],
         ["STARTING COORDINATES:",str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
         ["DESTINATION COORDINATES:",str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
         print (tabulate(tinfo,tablefmt="fancy_grid"))
