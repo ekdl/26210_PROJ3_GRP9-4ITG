@@ -21,13 +21,13 @@ while True:
  print(tabulate(menu,headers="firstrow",stralign="center",tablefmt="fancy_grid"))
 
  orig = input(Style.RESET_ALL+Style.BRIGHT +"Starting Location: ")
+ orig = orig.upper()
  if orig == "QUIT" or orig == "Q":
-  orig = orig.upper()
-    break
+   break
  dest = input(Style.BRIGHT +"Destination: ")
  dest = dest.upper()
  if dest == "QUIT" or dest == "Q":
-    break
+   break
  print("\n\n\n")
 
  #displays measurement menu and asks for 1 or 2 to select which measurement
