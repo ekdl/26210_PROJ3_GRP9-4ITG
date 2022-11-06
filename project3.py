@@ -19,11 +19,14 @@ while True:
  print("\n\n\n")
  #displays the menu and asks for the starting loc and destination
  print(tabulate(menu,headers="firstrow",stralign="center",tablefmt="fancy_grid"))
+
  orig = input(Style.RESET_ALL+Style.BRIGHT +"Starting Location: ")
- if orig == "quit" or orig == "q":
+ if orig == "QUIT" or orig == "Q":
+  orig = orig.upper()
     break
  dest = input(Style.BRIGHT +"Destination: ")
- if dest == "quit" or dest == "q":
+ dest = dest.upper()
+ if dest == "QUIT" or dest == "Q":
     break
  print("\n\n\n")
 
@@ -75,7 +78,7 @@ while True:
       #if a route is found, the infos of the trip are stored in a list to display it in a tabular format
         tinfo = [["DIRECTIONS FROM:",(orig) + " to " + (dest)],["TRIP DURATION:",(json_data["route"]["formattedTime"])],
         ["TRIP DISTANCE:",str("{:.2f}".format((json_data["route"]["distance"]))+" miles")],
-        ["ESTIMATED FUEL USAGE:", str("{:.2f}".format((json_data["route"]["fuelUsed"]))+" gallons")],
+        #["ESTIMATED FUEL USAGE:", str("{:.2f}".format((json_data["route"]["fuelUsed"]))+" gallons")],
         ["STARTING COORDINATES:",str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
         ["DESTINATION COORDINATES:",str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
         print (tabulate(tinfo,tablefmt="fancy_grid"))
