@@ -15,7 +15,7 @@ mesme=[[Fore.YELLOW+Style.BRIGHT+"MEASUREMENT MENU"+Style.RESET_ALL]]
 
 while True:
  #sets the nav list for the directions. this variable is in the loop so it can reset after a trip has finished.
- nav=[[Style.RESET_ALL+Fore.GREEN+"DIRECTIONS FOR NAVIGATION"+Style.RESET_ALL]]
+ nav=[[Style.RESET_ALL+Fore.GREEN+Style.BRIGHT+"DIRECTIONS FOR NAVIGATION"+Style.RESET_ALL]]
  print("\n\n\n")
  #displays the menu and asks for the starting loc and destination
  print(tabulate(menu,headers="firstrow",stralign="center",tablefmt="fancy_grid"))
@@ -76,11 +76,11 @@ while True:
  else:
      if json_status == 0:
       #if a route is found, the infos of the trip are stored in a list to display it in a tabular format
-        tinfo = [["DIRECTIONS FROM:",(orig) + " to " + (dest)],["TRIP DURATION:",(json_data["route"]["formattedTime"])],
-        ["TRIP DISTANCE:",str("{:.2f}".format((json_data["route"]["distance"]))+" miles")],
+        tinfo = [[Fore.MAGENTA+Style.BRIGHT+"DIRECTIONS FROM:",Style.RESET_ALL+Fore.MAGENTA+(orig) + " to " + (dest)],[Fore.MAGENTA+Style.BRIGHT+"TRIP DURATION:",Style.RESET_ALL+Fore.MAGENTA+(json_data["route"]["formattedTime"])],
+        [Fore.MAGENTA+Style.BRIGHT+"TRIP DISTANCE:",Style.RESET_ALL+Fore.MAGENTA+str("{:.2f}".format((json_data["route"]["distance"]))+" miles")],
         #["ESTIMATED FUEL USAGE:", str("{:.2f}".format((json_data["route"]["fuelUsed"]))+" gallons")],
-        ["STARTING COORDINATES:",str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
-        ["DESTINATION COORDINATES:",str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
+        [Fore.MAGENTA+Style.BRIGHT+"STARTING COORDINATES:",Style.RESET_ALL+Fore.MAGENTA+str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
+        [Fore.MAGENTA+Style.BRIGHT+"DESTINATION COORDINATES:",Style.RESET_ALL+Fore.MAGENTA+str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
         print (tabulate(tinfo,tablefmt="fancy_grid"))
         #for loop stores narratives in a list to be able to display it in tabular form
         for each in json_data["route"]["legs"][0]["maneuvers"]:
