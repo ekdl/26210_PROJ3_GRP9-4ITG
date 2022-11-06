@@ -4,14 +4,14 @@ import requests
 from tabulate import tabulate
 from colorama import Fore, Style, Back
 
+
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "z1P3gykOzfNMSPTKFF9nGTmmobAG19A0"
 #creates a list for the menu to be displayed
 menu = [[Fore.BLUE  + Style.BRIGHT + "WELCOME TO MAPQUEST"], [Style.RESET_ALL+Fore.BLUE+"Please enter your Starting Location and Destination"],["enter " + Fore.RED +Style.BRIGHT + 'quit' +Style.RESET_ALL+ Fore.BLUE+" or " + Fore.RED + Style.BRIGHT +'q'+ Style.RESET_ALL+Fore.BLUE+" to quit program"]]
 #creates lists for the measurement options
-mesmenu=[[Style.RESET_ALL+Fore.CYAN+"1","2"],[Style.RESET_ALL+Fore.CYAN+Style.BRIGHT +" METRIC ","IMPERIAL"]]
-mesme=[[Fore.YELLOW+Style.BRIGHT+"MEASUREMENT MENU"+Style.RESET_ALL]]
-
+mesmenu=[[Fore.YELLOW+Style.BRIGHT+"MEASUREMENT MENU"+Style.RESET_ALL,"INPUT"],[Style.RESET_ALL+Fore.CYAN+"METRIC","1"],[Style.RESET_ALL+Fore.CYAN+Style.BRIGHT +" IMPERIAL","2"]]
+colspan = {(0, 0): 2}
 
 while True:
  #sets the nav list for the directions. this variable is in the loop so it can reset after a trip has finished.
@@ -31,7 +31,6 @@ while True:
  print("\n\n\n")
 
  #displays measurement menu and asks for 1 or 2 to select which measurement
- print(tabulate(mesme,headers="firstrow",stralign="center",tablefmt="fancy_grid"))
  print(tabulate(mesmenu,stralign="center",tablefmt="fancy_grid"))
  mes= int(input(Style.RESET_ALL+Style.BRIGHT +"ENTER 1 OR 2:"))
 
@@ -54,21 +53,22 @@ while True:
         [Fore.MAGENTA+Style.BRIGHT+"STARTING COORDINATES:",Style.RESET_ALL+Fore.MAGENTA+str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
         [Fore.MAGENTA+Style.BRIGHT+"DESTINATION COORDINATES:",Style.RESET_ALL+Fore.MAGENTA+str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
         print (tabulate(tinfo,tablefmt="fancy_grid"))
+        print("\n\n")
         #for loop stores the narratives in a list so it can be displayed in tabular form
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             nav.append([(each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)")])
         print(tabulate(nav,headers="firstrow",tablefmt="github"))
     #elif statements are error codes for the entries. 
     elif json_status == 402:
-        print("**********************************************\n")
+        print("**************************************************************************\n")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
         print("**********************************************\n")
     elif json_status == 611:
-        print("**********************************************")
+        print("*************************************************************************")
         print("Status Code: " + str(json_status) + "; Missing an entry for one or both locations.")
         print("**********************************************\n")
     else:
-        print("************************************************************************")
+        print("*************************************************************************")
         print("For Staus Code: " + str(json_status) + "; Refer to:")
         print("https://developer.mapquest.com/documentation/directions-api/status-codes")
         print("************************************************************************\n")
@@ -82,18 +82,19 @@ while True:
         [Fore.MAGENTA+Style.BRIGHT+"STARTING COORDINATES:",Style.RESET_ALL+Fore.MAGENTA+str(json_data["route"]["boundingBox"]["lr"]["lat"])+", "+str(json_data["route"]["boundingBox"]["lr"]["lng"])],
         [Fore.MAGENTA+Style.BRIGHT+"DESTINATION COORDINATES:",Style.RESET_ALL+Fore.MAGENTA+str(json_data["route"]["boundingBox"]["ul"]["lat"])+", "+str(json_data["route"]["boundingBox"]["ul"]["lng"])]]
         print (tabulate(tinfo,tablefmt="fancy_grid"))
+        print("\n\n")
         #for loop stores narratives in a list to be able to display it in tabular form
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             nav.append([(each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])) + " miles)")])
         print(tabulate(nav,headers="firstrow",tablefmt="github"))
-        print("=============================================\n")
+        
         #elif statements are also error codes when there are no routes for the locations or if there is An error with the input
      elif json_status == 402:
-        print("**********************************************")
+        print("************************************************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
         print("**********************************************\n")
      elif json_status == 611:
-        print("**********************************************")
+        print("*************************************************************************")
         print("Status Code: " + str(json_status) + "; Missing an entry for one or both locations.")
         print("**********************************************\n")
      else:
